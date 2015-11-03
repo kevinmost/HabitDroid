@@ -1,0 +1,76 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+ext {
+  versionAppCode = 1
+  versionAppName = "1.0"
+
+  versionAndroidSupport = "23.1.0"
+
+  versionGlide = "3.6.1"
+  versionJackson = "2.6.2"
+  versionButterKnife = "7.0.1"
+  versionDiskLRUCache = "2.0.2"
+  versionDagger = "2.0.1"
+  versionPicasso = "2.5.2"
+  versionOkHttp = "2.5.0"
+  versionOtto = "1.3.8"
+  versionReyMaterial = "1.2.1"
+}
+
+android {
+  compileSdkVersion 23
+  buildToolsVersion "23.0.1"
+
+  defaultConfig {
+    applicationId "com.kevinmost.habitdroid"
+    minSdkVersion 16
+    targetSdkVersion 23
+    versionCode versionAppCode
+    versionName versionAppName
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+  sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+  }
+}
+
+kapt {
+  generateStubs = true
+}
+
+dependencies {
+  compile fileTree(dir: 'libs', include: ['*.jar'])
+  testCompile 'junit:junit:4.12'
+  compile "com.android.support:appcompat-v7:$versionAndroidSupport"
+  compile "com.android.support:design:$versionAndroidSupport"
+  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+
+  // I <3 Jake Wharton starter pack
+  compile "com.jakewharton:butterknife:$versionButterKnife"
+  compile "com.jakewharton:disklrucache:$versionDiskLRUCache"
+  compile "com.squareup.picasso:picasso:$versionPicasso"
+  compile "com.squareup.okhttp:okhttp:$versionOkHttp"
+  compile "com.squareup:otto:$versionOtto"
+  compile "com.google.dagger:dagger:$versionDagger"
+  kapt "com.google.dagger:dagger-compiler:$versionDagger"
+  provided 'org.glassfish:javax.annotation:10.0-b28'
+}
+
+buildscript {
+  ext.kotlinVersion = '0.14.449'
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+  }
+}
+repositories {
+  mavenCentral()
+}
